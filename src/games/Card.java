@@ -47,13 +47,14 @@ public class Card {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Card [cardNumber=");
+//		builder.append("Card [cardNumber=");
 		builder.append(cardNumber);
-		builder.append(", suit=");
+		builder.append(" of ");
 		builder.append(suit);
-		builder.append("]");
+//		builder.append("]");
 		return builder.toString();
 	}
+	
 }
 
 
