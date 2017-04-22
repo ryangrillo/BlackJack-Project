@@ -7,7 +7,7 @@ import java.util.List;
 public class Deck {
 	List<Card> deck = new ArrayList<>(52);
 
-	public void displayShuffledCards() {
+	public void ShuffleCards() {
 
 		for (Suit s : Suit.values()) {
 			for (CardNumber r : CardNumber.values()) {
