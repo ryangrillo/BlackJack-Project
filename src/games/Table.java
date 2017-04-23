@@ -13,7 +13,7 @@ public class Table {
 		Deck d = new Deck();
 		d.createDeck();
 		d.ShuffleCards();
-		Card c = d.getCard();
+		//Card c = d.getCard();
 		// System.out.println("C " + c);
 		// System.out.println(c.getCardNumber().getValue());
 
@@ -36,6 +36,7 @@ public class Table {
 				oneTotal = oneTotal + card.getCardNumber().getValue();
 			}
 			System.out.println("Player Total: " + oneTotal);
+			
 			boolean keepPlayingHand = true;
 			while (keepPlayingHand) {
 				System.out.print(one.Name + "Would you like to (h)it or(s)tay: ");
@@ -44,11 +45,11 @@ public class Table {
 				if (hitOrStay.equals("h")) {
 					one.addCard(d.getCard());
 					for (Card card : one.getPlayerHand()) {
-						System.out.println("Player: " + card);
+						System.out.println("Player gets: " + card);
 						oneTotal = oneTotal + card.getCardNumber().getValue();
 					}
-					System.out.println(one.getPlayerHand());
 					System.out.println(one.Name + " you have " + oneTotal + "points");
+					System.out.println(comp.Name + " has " + compTotal + " points");
 					if (oneTotal > 21) {
 						System.out.println("You lost!");
 						System.out.println("You bust");
@@ -59,20 +60,21 @@ public class Table {
 						comp.setPlayerHand(new ArrayList<Card>());
 					}
 				} else {
-					compTotal = 0;
 					while (compTotal < 17) {
 						compTotal = 0;
 						comp.addCard(d.getCard());
 						for (Card card : comp.getPlayerHand()) {
-							System.out.println("Comp: " + card);
+							//System.out.println("Comp: " + card);
 							compTotal = compTotal + card.getCardNumber().getValue();
 						}
+						System.out.println();
+						//System.out.println("Comp Total: " + compTotal);
 					}
 					for (Card card : one.getPlayerHand()) {
 						oneTotal = oneTotal + card.getCardNumber().getValue();
 					}
-					System.out.println(comp.getPlayerHand());
-					System.out.println(comp.Name + " you have " + compTotal + " points");
+					//System.out.println(comp.getPlayerHand());
+					System.out.println(comp.Name + " has " + compTotal + " points");
 					// call checkForWin method pass in oneTotal and compTotal
 					if (compTotal > 21) {
 						System.out.println("You win!");
