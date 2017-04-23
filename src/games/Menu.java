@@ -28,11 +28,8 @@ public class Menu {
 		switch (choice) {
 		case 1:
 			System.out.println("you chose 1");
-			Player one = new Player("PlayerOne");
-			Player comp = new Player("Computer");
-			System.out.println("Welcome " + one.getName() + " You are playing against " + comp.getName() + "\n");
-		    HandLogic th = new HandLogic();
-		    th.Hand();
+			Table t = new Table();
+			t.start();
 			
 			break;
 		case 2:
