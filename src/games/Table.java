@@ -12,14 +12,15 @@ public class Table {
 		d.createDeck();
 		d.ShuffleCards();
 		Card c = d.getCard();
-		System.out.println("C " + c);
-		System.out.println(c.getCardNumber().getValue());
+		//System.out.println("C " + c);
+		//System.out.println(c.getCardNumber().getValue());
 		one.addCard(d.getCard());
 		one.addCard(d.getCard());
 		comp.addCard(d.getCard());
 		comp.addCard(d.getCard());
 		int compTotal = 0;
 		int oneTotal = 0;
+		
 		for (Card card : comp.getPlayerHand()) {
 			System.out.println("Computer: " + card);
 			compTotal = compTotal + card.getCardNumber().getValue();
@@ -30,6 +31,39 @@ public class Table {
 			oneTotal = oneTotal + card.getCardNumber().getValue();
 		}
 		System.out.println("Player Total: " + oneTotal);
+		
+		while (oneTotal < 21) {
+			System.out.print(one.Name + "Would you like to (h)it or(s)tay: ");
+			oneTotal = 0;
+			String hitOrStay = kb.nextLine();
+			if (hitOrStay.equals("h")) {
+				one.addCard(d.getCard());
+				for (Card card : one.getPlayerHand()) {
+					System.out.println("Player: " + card);
+					oneTotal = oneTotal + card.getCardNumber().getValue();
+				}
+				System.out.println(one.getPlayerHand());
+				System.out.println(one.Name + " you have " + oneTotal + "points");
+				if(oneTotal>21){
+					System.out.println("You lost!");
+				}
+			}
+			else{
+				compTotal = 0;
+				while(compTotal<17){
+					compTotal = 0;
+					comp.addCard(d.getCard());
+					for (Card card : one.getPlayerHand()) {
+						System.out.println("Player: " + card);
+						compTotal = compTotal + card.getCardNumber().getValue();
+					}
+				}
+				System.out.println(comp.getPlayerHand());
+				System.out.println(comp.Name + " you have " + compTotal + "points");
+				//call checkForWin method pass in oneTotal and compTotal
+				break;
+			}
+		}
 		
 		
 		
@@ -51,7 +85,7 @@ public class Table {
 //		System.out.print(deck.getDeck().remove(0) + "\n\n");
 //		System.out.println("playercardvalue: " + playerCardValueCardOne);
 		
-		System.out.println("Computer:");
+//		System.out.println("Computer:");
 //		Integer computerCardValueCardOne = deck.getDeck().get(0).getCardNumber().getValue(); //takes card value and store it as int
 //	    System.out.print(deck.getDeck().remove(0) + "\n");//removes card from deck
 //		Integer computerCardValueCardTwo = deck.getDeck().get(0).getCardNumber().getValue(); //takes card value and store it 
