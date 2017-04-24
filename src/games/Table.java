@@ -26,28 +26,38 @@ public class Table {
 			int compTotal = 0;
 			int oneTotal = 0;
 
+			//System.out.println(comp.getPlayerHand().size() + " is the size");
 			for (Card card : comp.getPlayerHand()) {
-				System.out.println("Computer: " + card);
+				//System.out.println("Computer: " + card);
 				compTotal = compTotal + card.getCardNumber().getValue();
 			}
-			System.out.println("Comp Total: " + compTotal);
+			System.out.println("Computer shows: " + comp.getPlayerHand().get(0) + "\n") ;
+			//System.out.println(comp.getPlayerHand().get(1) + " is position 1") ;
+
+			//System.out.println("Comp Total: " + compTotal);
 			for (Card card : one.getPlayerHand()) {
 				System.out.println("Player: " + card);
 				oneTotal = oneTotal + card.getCardNumber().getValue();
 			}
-			System.out.println("Player Total: " + oneTotal);
+			System.out.println("Player Total: " + oneTotal + "\n");
 			
 			boolean keepPlayingHand = true;
 			while (keepPlayingHand) {
-				System.out.print(one.Name + "Would you like to (h)it or(s)tay: ");
+				System.out.print("(h)it or(s)tay: ");
 				oneTotal = 0;
 				String hitOrStay = kb.nextLine();
 				if (hitOrStay.equals("h")) {
 					one.addCard(d.getCard());
 					for (Card card : one.getPlayerHand()) {
-						System.out.println("Player gets: " + card);
+						System.out.println("Player has: " + card);
 						oneTotal = oneTotal + card.getCardNumber().getValue();
 					}
+					for (Card card : one.getPlayerHand()) {
+						if (card.getCardNumber().equals(CardNumber.Ace) && oneTotal > 21) {
+							oneTotal = oneTotal - 10;
+						}
+					}
+					System.out.println();
 					System.out.println(one.Name + " you have " + oneTotal + "points");
 					System.out.println(comp.Name + " has " + compTotal + " points");
 					if (oneTotal > 21) {
@@ -64,27 +74,33 @@ public class Table {
 						compTotal = 0;
 						comp.addCard(d.getCard());
 						for (Card card : comp.getPlayerHand()) {
-							//System.out.println("Comp: " + card);
 							compTotal = compTotal + card.getCardNumber().getValue();
 						}
+						//30
+						for (Card card : comp.getPlayerHand()) {
+							if (card.getCardNumber().equals(CardNumber.Ace) && compTotal > 21) {
+								compTotal = compTotal - 10;
+							}
+						}
+						for (Card card : comp.getPlayerHand()) {
+						System.out.println("Comp: " + card);
+						}
 						System.out.println();
-						//System.out.println("Comp Total: " + compTotal);
 					}
 					for (Card card : one.getPlayerHand()) {
 						oneTotal = oneTotal + card.getCardNumber().getValue();
 					}
 					//System.out.println(comp.getPlayerHand());
-					System.out.println(comp.Name + " has " + compTotal + " points");
+					//System.out.println(comp.Name + " has " + compTotal + " points");
 					// call checkForWin method pass in oneTotal and compTotal
 					if (compTotal > 21) {
-						System.out.println("You win!");
+						System.out.println("Computer Busted! \nYou win!");
 						keepPlayingHand = false;
 					} else {
 						checkForWin(oneTotal, compTotal);
 						keepPlayingHand = false;
 					}
 				}
-
 			}
 			oneTotal = 0;
 			compTotal = 0;
@@ -92,15 +108,28 @@ public class Table {
 			comp.setPlayerHand(new ArrayList<Card>());
 			System.out.println();
 			System.out.println();
+			
+			System.out.println(d.getDeck().size() + " cards left in the deck");
 			System.out.println();
 			System.out.println();
+			if(d.getDeck().size()<10){
+				d.createDeck();
+				d.ShuffleCards();
+				System.out.println("*************************************");
+				System.out.println("********                   **********");
+				System.out.println("******** Shuffled New Deck **********");
+				System.out.println("********                   **********");
+				System.out.println("*************************************");
+				System.out.println();
+				System.out.println();
+			}
 
 		}
 	}
 
 	public void checkForWin(int playerTotal, int compTotal) {
-		System.out.println(playerTotal);
-		System.out.println(compTotal);
+		System.out.println("Player has: " + playerTotal);
+		System.out.println("Computer has: " + compTotal);
 		if (playerTotal > compTotal) {
 			System.out.println("Player 1 wins this hand");
 		} else if (playerTotal == compTotal) {
