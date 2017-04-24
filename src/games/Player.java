@@ -5,7 +5,12 @@ import java.util.List;
 
 public class Player {
 	String Name;
+	float Bank;
 	
+	public Player(float bank) {
+		Bank = bank;
+	}
+
 	List<Card> playerHand = new ArrayList<>();
 	
 

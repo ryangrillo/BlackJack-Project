@@ -13,9 +13,6 @@ public class Table {
 		Deck d = new Deck();
 		d.createDeck();
 		d.ShuffleCards();
-		//Card c = d.getCard();
-		// System.out.println("C " + c);
-		// System.out.println(c.getCardNumber().getValue());
 
 		boolean keepPlaying = true;
 		while (keepPlaying) {
@@ -26,9 +23,7 @@ public class Table {
 			int compTotal = 0;
 			int oneTotal = 0;
 
-			//System.out.println(comp.getPlayerHand().size() + " is the size");
 			for (Card card : comp.getPlayerHand()) {
-				//System.out.println("Computer: " + card);
 				compTotal = compTotal + card.getCardNumber().getValue();
 			}
 			System.out.println("Computer shows: " + comp.getPlayerHand().get(0) + "\n") ;
